@@ -72,14 +72,21 @@ while wants_to_play:
     if user_input.lower() == 'q' or user_input.lower() == "quit":
         wants_to_play = False
 
-    if user_input.lower()[0] == 't' and rooms[user.current_room].items_inside != []:
+    elif user_input.lower()[0] == 't' and rooms[user.current_room].items_inside != []:
         item_name = user_input.lower()[2:]
         item = rooms[user.current_room].items_inside[rooms[user.current_room].items_inside.index(item_name)]
-        print(f"You got a {item}!")
+        print(f"You got a {item}! Press D to get rid of it and I to see your inventory")
         user.get_item(item)
         rooms[user.current_room].lose_item(item)
         items[item].on_take(user)
 
+    elif user_input.lower()[0] == 'd' and user.inventory != []:
+        item_name = user_input.lower()[2:]
+        item = user.inventory[user.inventory.index(item_name)]
+        print(f"You dropped your {item}!")
+        user.lose_item(item)
+        rooms[user.current_room].get_item(item)
+        items[item].on_drop(user)
 
     #rules for Northern advance
     elif user_input.lower() == 'n':
