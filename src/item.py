@@ -1,8 +1,8 @@
 class Item:
-    def __init__(self, item_name, item_description, current_location = None, held_by = None):
+    def __init__(self, item_name, item_description, current_room = None, held_by = None):
         self.item_name = item_name
         self.item_description = item_description
-        self.current_location = current_location
+        self.current_room = current_room
         self.held_by = held_by
 
     def __str__(self):
@@ -10,4 +10,8 @@ class Item:
 
     def on_take(self, player):
         self.held_by = player
-        self.current_location = None
+        self.current_room = None
+
+    def on_drop(self, current_room):
+        self.held_by = None
+        self.current_room = current_room

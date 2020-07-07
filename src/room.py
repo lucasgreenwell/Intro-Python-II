@@ -7,7 +7,7 @@
 #
 # The room should also have n_to, s_to, e_to, and w_to attributes which point to the room in that respective direction.
 class Room:
-    def __init__(self, room_name, room_description, items_inside = None):
+    def __init__(self, room_name, room_description, items_inside = []):
         self.room_name = room_name
         self.room_description = room_description
         self.items_inside = items_inside
@@ -21,3 +21,9 @@ class Room:
 
     def __str__(self):
         return f"{self.room_name}: {self.room_description}"
+
+    def get_item(self, item):
+        self.items_inside.append(item)
+
+    def lose_item(self, item):
+        self.items_inside.remove(item)

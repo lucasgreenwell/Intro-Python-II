@@ -88,4 +88,12 @@ while wants_to_play:
         else:
             user_input = input(f"You are not able to go that way. Pick a different direction. Current Room: {user.current_room}. {rooms[user.current_room].room_description}. Pick a direction, N, E, S, or W. Press Q to exit ")
 
+    # east
+    elif user_input.lower() == 'e':
+        east_room = rooms[user.current_room].e_to
+        if east_room != None:
+            user.current_room = east_room.room_name.lower()
+        else:
+            user_input = input(
+                f"You are not able to go that way. Pick a different direction. Current Room: {user.current_room}. {rooms[user.current_room].room_description}. Pick a direction, N, E, S, or W. Press Q to exit ")
 
