@@ -88,6 +88,9 @@ while wants_to_play:
         rooms[user.current_room].get_item(item)
         items[item].on_drop(user)
 
+    elif user_input.lower() == 'i':
+        print(user.inventory)
+
     #rules for Northern advance
     elif user_input.lower() == 'n':
         north_room = rooms[user.current_room].n_to
