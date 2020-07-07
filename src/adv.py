@@ -3,14 +3,16 @@ from player import Player
 from item import Item
 
 
-
+items = {
+    'sword': Item("Big Sword", "It's a really big sword", current_room = 'outside')
+}
 
 
 # Declare all the rooms
 
 rooms = {
     'outside':  Room("Outside",
-                     "North of you, the cave mount beckons"),
+                     "North of you, the cave mount beckons", items_inside = ['sword']),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
 passages run north and east."""),
@@ -59,10 +61,25 @@ user = Player("Adventurer", "outside")
 
 wants_to_play = True
 while wants_to_play:
+    # if there's an item let the player know
+    if rooms[user.current_room].items_inside != []:
+        item = rooms[user.current_room].items_inside[0]
+        print(f"There's a {item} in here! {items[item].item_description}! To grab it, press T followed by the item name.")
+        # print(rooms[user.current_room].items_inside)
+
     user_input = input(f"Current Room: {user.current_room}. {rooms[user.current_room].room_description}. Pick a direction, N, E, S, or W. Press Q to exit ")
    #quitting
     if user_input.lower() == 'q' or user_input.lower() == "quit":
         wants_to_play = False
+
+    if user_input.lower()[0] == 't' and rooms[user.current_room].items_inside != []:
+        item_name = user_input.lower()[2:]
+        item = rooms[user.current_room].items_inside[rooms[user.current_room].items_inside.index(item_name)]
+        print(f"You got a {item}!")
+        user.get_item(item)
+        rooms[user.current_room].lose_item(item)
+        items[item].on_take(user)
+
 
     #rules for Northern advance
     elif user_input.lower() == 'n':
