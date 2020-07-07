@@ -7,10 +7,11 @@
 #
 # The room should also have n_to, s_to, e_to, and w_to attributes which point to the room in that respective direction.
 class Room:
-    def __init__(self, room_name, room_description, items_inside = []):
+    def __init__(self, room_name, room_description, items_inside = [], monster = None):
         self.room_name = room_name
         self.room_description = room_description
         self.items_inside = items_inside
+        self.monster = monster
 
         # Need to set these explicitly when calling the room constructor
         self.n_to = None

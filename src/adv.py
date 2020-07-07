@@ -1,6 +1,9 @@
 from room import Room
 from player import Player
 from item import Item
+from monster import Monster
+
+monster = Monster("dragon", "it's a huge dragon. Watch out and press A to attack", "the dragon ate you. Should've picked up that sword", 'foyer')
 
 
 items = {
@@ -15,7 +18,7 @@ rooms = {
                      "North of you, the cave mount beckons", items_inside = ['sword']),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
-passages run north and east."""),
+passages run north and east.""", monster="dragon"),
 
     'overlook': Room("Overlook", """A steep cliff appears before you, falling
 into the darkness. Ahead to the north, a light flickers in
@@ -61,6 +64,14 @@ user = Player("Adventurer", "outside")
 
 wants_to_play = True
 while wants_to_play:
+    if rooms[user.current_room].monster != None:
+        if user_input.lower() == 'a' and user.inventory != []:
+            print("you slayed a dragon! that's gotta feel pretty cool")
+        elif user.inventory != []:
+            print(monster.monster_description)
+        else:
+            print(monster.monster_attack)
+
     # if there's an item let the player know
     if rooms[user.current_room].items_inside != []:
         item = rooms[user.current_room].items_inside[0]
