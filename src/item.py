@@ -8,6 +8,9 @@ class Item:
     def __str__(self):
         return f"<{self.item_name}: {self.item_description}"
 
+    def get_item_name (self):
+        return self.item_name
+
     def on_take(self, player):
         self.held_by = player
         self.current_room = None
